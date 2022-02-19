@@ -7,9 +7,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Pin|null find($id, $lockMode = null, $lockVersion = null)
- * @method Pin|null findOneBy(array $criteria, array $orderBy = null)
- * @method Pin[]    findAll()
+ * @method Pin|null neBy(array $criteria, array $orderBy = null)
+ * @method Pin[]    findAll()find($id, $lockMode = null, $lockVersion = null)
+ * @method Pin|null findO
  * @method Pin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class PinRepository extends ServiceEntityRepository

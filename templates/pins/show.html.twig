@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% set len = pin.id %}
+
+{% block title %}Pintorest : {{len}} {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card">
+        <div class="card-title">
+            {{pin.title}}
+        </div>
+        <div class="card-body">
+            {{ pin.description}}
+        </div>
+        <div class="card-footer">
+            <a href="{{path('app_home')}}"> Back </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
