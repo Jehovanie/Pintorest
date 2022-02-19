@@ -3,5 +3,18 @@
 {% block title %}Pintorest : Home {% endblock %}
 
 {% block body %}
-<h1> All Pins </h1>
+{% set len = pins|length %}
+<h1> {{ pluralize( len , "Pin") }} </h1>
+<div class="container">
+    {% for pin in pins %}
+    <div>
+        <h4> {{ pin.title }} </h4>
+        <p> {{ pin.description }} </p>
+    </div>
+    {% else %}
+    <div>
+        <h5> Il y a pas de pin pour le moment . Veuilez Rajouter !!! </h5>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

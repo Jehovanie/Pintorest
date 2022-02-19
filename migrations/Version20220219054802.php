@@ -14,7 +14,7 @@ final class Version20220219054802 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Create table pins';
     }
 
     public function up(Schema $schema): void
