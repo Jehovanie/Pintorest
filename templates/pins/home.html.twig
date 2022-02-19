@@ -8,9 +8,9 @@
 <div class="container">
     {% for pin in pins %}
     <div>
-        <a href="{{path('app_show_pin',{ id : pin.id})}}">
-            <h4>{{ pin.title }}</h4>
-        </a>
+        <h4>
+            <a href="{{path('app_show_pin',{ id : pin.id})}}">{{ pin.title }}</a>
+        </h4>
         <p> {{ pin.description }} </p>
     </div>
     {% else %}
