@@ -4,7 +4,11 @@
 
 {% block body %}
 {% set len = pins|length %}
-<h1> {{ pluralize( len , "Pin") }} </h1>
+<div>
+    <h1> {{ pluralize( len , "Pin") }} </h1>
+    <h5> <a href="{{path('app_create_pin')}}">Create Nouvelle Pin</a></h5>
+</div>
+
 <div class="container">
     {% for pin in pins %}
     <div>
@@ -12,6 +16,7 @@
             <a href="{{path('app_show_pin',{ id : pin.id})}}">{{ pin.title }}</a>
         </h4>
         <p> {{ pin.description }} </p>
+        <h5> <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a> <a href="{{path('app_delete_pin',{ id : pin.id})}}"> Supprime</a></h5>
     </div>
     {% else %}
     <div>

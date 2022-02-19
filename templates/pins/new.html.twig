@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pintorest : Nouveau {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card">
+        <div class="card-title">
+            <h4> Nouveau Pin</h4>
+        </div>
+        <div class="card-body">
+            {{ form_start(formulaire)}}
+            {{ form_widget(formulaire) }}
+            <input type="submit" value="Create new Pin">
+            {{ form_end(formulaire)}}
+        </div>
+        <div class="card-footer">
+            <h5> <a href="{{path("app_home")}}">Annuler</a></h5>
+        </div>
+    </div>
+</div>
+{% endblock %}
