@@ -72,9 +72,9 @@ class PinsController extends AbstractController
 
         $pin = $repo->find($id);
 
-        $form = $this->createFormBuilder()
+        $form = $this->createFormBuilder($pin)
             ->add("title", TextType::class, ['attr' => ["value" => $pin->getTitle()]])
-            ->add("description", TextareaType::class, ['attr' => ["value" => $pin->getDescription()]])
+            ->add("description", TextareaType::class)
             ->getform();
 
         $form->handleRequest($request);
@@ -82,8 +82,11 @@ class PinsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $form->getData();
-            $pin->setTitle($data['title']);
-            $pin->setDescription($data['description']);
+
+            $pin->setTitle($data->getTitle());
+            $pin->setDescription($data->getDescription());
+
+            $pin->updateTimestamp();
 
             $entityManager->persist($pin);
             $entityManager->flush();
