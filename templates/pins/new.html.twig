@@ -1,17 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pintorest : Nouveau {% endblock %}
+{% if ( pin.id != null  ) %}
+    {% set title = "Pintorest : Edit #" ~ pin.id %}
+    {% set text = "Modifier cette Pin" %}
+    {% set btn = "Modifier cette Pin" %}
+{% else %}
+    {% set title = "Pintorest : Nouveau" %}
+    {% set text = "Nouveau Pin" %}
+    {% set btn = "Create new Pin" %}
+{% endif %}
+
+{% block title %} {{title}} {% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="card">
         <div class="card-title">
-            <h4> Nouveau Pin</h4>
+            <h4> {{text}} </h4>
         </div>
         <div class="card-body">
             {{ form_start(formulaire)}}
             {{ form_widget(formulaire) }}
-            <input type="submit" value="Create new Pin">
+            <input type="submit" value="{{btn}}">
             {{ form_end(formulaire)}}
         </div>
         <div class="card-footer">

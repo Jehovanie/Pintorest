@@ -16,7 +16,16 @@
             <a href="{{path('app_show_pin',{ id : pin.id})}}">{{ pin.title }}</a>
         </h4>
         <p> {{ pin.description }} </p>
-        <h5> <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a> <a href="{{path('app_delete_pin',{ id : pin.id})}}"> Supprime</a></h5>
+        <h5> 
+            <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
+            <a href="#" onclick="event.preventDefault(); confirm('Vous êtes sure de la supprimer ?') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
+        </h5>
+
+
+        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="DELETE"
+            style="display:none;">
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
     </div>
     {% else %}
     <div>

@@ -14,8 +14,18 @@
             {{ pin.description}}
         </div>
         <div class="card-footer">
-            <a href="{{path('app_home')}}"> Back </a>
+            <h5>
+                <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
+                <a href="#" onclick="event.preventDefault(); confirm('Are you sure') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
+                <a href="{{path('app_home')}}">Back</a>
+            </h5>
         </div>
+        
+        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="DELETE"
+            style="display:none;">
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
+
     </div>
 </div>
-{% endblock %}
+{% endblock %}  
