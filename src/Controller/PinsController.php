@@ -55,6 +55,8 @@ class PinsController extends AbstractController
             $entityManager->persist($pin);
             $entityManager->flush();
 
+            $this->addFlash("success", "Pin succesfull created...");
+
             return $this->redirectToRoute("app_show_pin", ["id" => $pin->getId()]);
         }
 
@@ -71,9 +73,24 @@ class PinsController extends AbstractController
     {
 
         $pin = $repo->find($id);
-        $result = $this->create($request, $entityManager, $pin);
+        $form = $this->createForm(PinType::class, $pin);
 
-        return $result;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($pin);
+            $entityManager->flush();
+
+            $this->addFlash("success", "Pin succesfull updated...");
+
+            return $this->redirectToRoute("app_show_pin", ["id" => $pin->getId()]);
+        }
+
+        return $this->render('pins/update.html.twig', [
+            "formulaire" => $form->createView(),
+            "pin" => $pin
+        ]);
     }
 
     /**
@@ -81,11 +98,15 @@ class PinsController extends AbstractController
      */
     public function delete(PinRepository $repo, EntityManagerInterface $entityManager, int $id): Response
     {
+        $this->addFlash("error", "Pin succesfull deleted...");
 
         $pin = $repo->find($id);
         $entityManager->remove($pin);
+
         $entityManager->flush();
 
-        return $this->index($repo);
+        return $this->redirectToRoute("app_home", [
+            "repo" => $repo
+        ]);
     }
 }

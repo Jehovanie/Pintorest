@@ -12,8 +12,35 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        <style>
+
+            .alert{
+                display: block;
+                width: 100vh;
+                text-align: center;
+                align-items: center;
+            }
+            .alert-success{
+                background-color: green;
+                color:white;
+            }
+            .alert-error{
+                background-color: red;
+                color : black ;
+            }
+
+        </style>
     </head>
     <body>
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{type}}" role="alert">
+                {{ message}}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
-    </body>
+    </bod y>
 </html>
