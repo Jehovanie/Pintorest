@@ -29,7 +29,9 @@ class PinsController extends AbstractController
     {
         $pin = $repo->find($id);
 
-        return $this->render('pins/show.html.twig', compact("pin"));
+        if ($pin) {
+            return $this->render('pins/show.html.twig', compact("pin"));
+        }
     }
 
     /**
