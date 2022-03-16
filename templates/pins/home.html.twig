@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
 
 {% block title %}Pintorest : Home {% endblock %}
 
@@ -21,7 +21,7 @@
             <a href="#" onclick="event.preventDefault(); confirm('Vous êtes sure de la supprimer ?') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
         </h5>
 
-        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="DELETE"
+        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
             style="display:none;">
             <input type="hidden" name="_method" value="DELETE">
         </form>
