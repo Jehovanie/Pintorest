@@ -23,18 +23,6 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}", name="app_show_pin" , methods="GET")
-     */
-    public function show(PinRepository $repo, int $id): Response
-    {
-        $pin = $repo->find($id);
-
-        if ($pin) {
-            return $this->render('pins/show.html.twig', compact("pin"));
-        }
-    }
-
-    /**
      * @Route("/pins/create", name="app_create_pin" , methods="GET|POST")
      */
     public function create(Request $request, EntityManagerInterface $entityManager, Pin $pin = null): Response
@@ -69,12 +57,22 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/update/{id<[0-9]+>}", name="app_update_pin" , methods="GET|POST")
+     * @Route("/pins/{id<[0-9]+>}", name="app_show_pin" , methods="GET")
      */
-    public function update(PinRepository $repo, Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function show(Pin $pin): Response
     {
 
-        $pin = $repo->find($id);
+        if ($pin) {
+            return $this->render('pins/show.html.twig', compact("pin"));
+        }
+    }
+
+
+    /**
+     * @Route("/pins/{id<[0-9]+>}/update", name="app_update_pin" , methods="GET|POST")
+     */
+    public function update(Request $request, Pin $pin, EntityManagerInterface $entityManager): Response
+    {
         $form = $this->createForm(PinType::class, $pin);
 
         $form->handleRequest($request);
@@ -96,19 +94,16 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/delete/{id<[0-9]+>}", name="app_delete_pin" , methods="GET|POST|DELETE")
+     * @Route("/pins/{id<[0-9]+>}/delete", name="app_delete_pin" , methods="POST|DELETE")
      */
-    public function delete(PinRepository $repo, EntityManagerInterface $entityManager, int $id): Response
+    public function delete(Pin $pin, EntityManagerInterface $entityManager): Response
     {
         $this->addFlash("error", "Pin succesfull deleted...");
 
-        $pin = $repo->find($id);
         $entityManager->remove($pin);
 
         $entityManager->flush();
 
-        return $this->redirectToRoute("app_home", [
-            "repo" => $repo
-        ]);
+        return $this->redirectToRoute("app_home");
     }
 }

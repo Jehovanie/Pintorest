@@ -16,7 +16,10 @@
             <h2>{{pin.title}}</h2>
         </div>
         <div class="card-body">
-            {{ pin.description}}
+            {{ pin.description | u.truncate(10 , '...', false)}}
+        </div>
+        <div>
+            {{ pin.createdAt | date}}
         </div>
         <div class="card-footer">
             <h5>
@@ -26,10 +29,11 @@
             </h5>
         </div>
         
-        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="DELETE"
+        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
             style="display:none;">
             <input type="hidden" name="_method" value="DELETE">
         </form>
+
 
     </div>
 </div>
