@@ -1,34 +1,31 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% if pin.id %}
-    {% set len = pin.id %}
+{% set len = pin.id %}
 {% endif %}
 
 {% block title %}Pintorest : {{len}} {% endblock %}
 
 {% block body %}
 <div class="container">
-    <div class="container">
-        <a href="{{ path('app_home')}}"> HOME</a>
-    </div>
-    <div class="card">
+    <div class="card p-4">
         <div class="card-title">
-            <h2>{{pin.title}}</h2>
+            <h2 class="text-primary">{{pin.title}}</h2>
         </div>
         <div class="card-body">
-            {{ pin.description | u.truncate(10 , '...', false)}}
+            {{ pin.description}}
         </div>
         <div>
-            {{ pin.createdAt | date}}
+            {{ pin.createdAt | ago}}
         </div>
         <div class="card-footer">
             <h5>
                 <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
-                <a href="#" onclick="event.preventDefault(); confirm('Are you sure') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
+                <a href="#"
+                    onclick="event.preventDefault(); confirm('Are you sure') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
                 <a href="{{path('app_home')}}">Back</a>
             </h5>
         </div>
-        
         <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
             style="display:none;">
             <input type="hidden" name="_method" value="DELETE">
@@ -37,4 +34,4 @@
 
     </div>
 </div>
-{% endblock %}  
+{% endblock %}
