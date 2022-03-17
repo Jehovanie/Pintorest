@@ -82,7 +82,7 @@ class PinsController extends AbstractController
             $entityManager->persist($pin);
             $entityManager->flush();
 
-            $this->addFlash("success", "Pin succesfull updated...");
+            $this->addFlash("info", "Pin succesfull updated...");
 
             return $this->redirectToRoute("app_show_pin", ["id" => $pin->getId()]);
         }
