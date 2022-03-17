@@ -3,22 +3,23 @@
 {% block title %}Pintorest : Home {% endblock %}
 
 {% block body %}
-{% set len = pins|length %}
-<div>
-    <h1> {{ pluralize( len , "Pin") }} </h1>
-    <h5> <a href="{{path('app_create_pin')}}">Create Nouvelle Pin</a></h5>
-</div>
 
 <div class="container">
+
+    {% set len = pins|length %}
+    <div>
+        <h1> {{ pluralize( len , "Pin") }} </h1>
+    </div>
     {% for pin in pins %}
     <div>
         <h4>
             <a href="{{path('app_show_pin',{ id : pin.id})}}">{{ pin.title }}</a>
         </h4>
         <p> {{ pin.description | u.truncate(10 , '...', false ) }} </p>
-        <h5> 
+        <h5>
             <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
-            <a href="#" onclick="event.preventDefault(); confirm('Vous êtes sure de la supprimer ?') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
+            <a href="#"
+                onclick="event.preventDefault(); confirm('Vous êtes sure de la supprimer ?') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
         </h5>
 
         <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
@@ -28,7 +29,7 @@
     </div>
     {% else %}
     <div>
-        <h5> Il y a pas de pin pour le moment . Veuilez Rajouter !!! </h5>
+        <h5> Il y a pas de pin pour le moment . Veuillez rajouter !!! </h5>
     </div>
     {% endfor %}
 </div>

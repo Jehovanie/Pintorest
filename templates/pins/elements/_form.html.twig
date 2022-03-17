@@ -1,15 +1,13 @@
-    <div class="card">
-        <div class="card-title">
-            <h4> {{text}} </h4>
-        </div>
-        <div class="card-body">
-            {{ form_start(formulaire)}}
-            {{ form_widget(formulaire) }}
-            <input type="submit" value="{{btn}}" formnovalidate>
-            {{ form_end(formulaire)}}
-        </div>
-        <div class="card-footer">
-            <h5> <a href="{{path("app_home")}}">Annuler</a></h5>
-        </div>
-    </div>  
-
+<div class="card p-4">
+    <div class="card-title">
+        <h4 class="text-primary"> {{text}} </h4>
+    </div>
+    <div class="card-body">
+        {{ form_start(formulaire)}}
+        {{ form_widget(formulaire) }}
+        <input class="btn btn-primary btn-block" type="submit" value="{{btn}}" formnovalidate>
+        {{ form_end(formulaire)}}
+        <hr>
+        <a class="btn btn-danger" href="{{path('app_home')}}"> Annuler</a>
+    </div>
+</div>
