@@ -1,0 +1,53 @@
+
+@font-face {
+    font-family: "font-1";
+    src: url(./style/fonts/CircularStd-Book.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+body {
+    display: block;
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: "font-1" , Arial, Helvetica, sans-serif;
+}
+
+main {
+    display: block;
+    min-height: 70vh;
+    overflow: hidden;
+}
+
+.alert {
+    display: block;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.alert-success {
+    background-color: green;
+    color: white;
+}
+
+.alert-info {
+    background-color: rgb(74, 166, 252);
+    color: white;
+}
+
+.alert-error {
+    background-color: red;
+    color: black;
+}
+
+.right {
+    justify-content: right !important;
+}
