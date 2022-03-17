@@ -16,7 +16,13 @@
     <!-- À supprimé lors de la deploiment -->
     <link rel="stylesheet" href="{{asset('style/css/bootstrap.css')}}">
     <style>
-        *{
+
+        @font-face {
+            font-family: "font-1";
+            src: url(../../public/style/fonts/CircularStd-Book.ttf);
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: 0;
@@ -27,6 +33,7 @@
             min-width: 100vw;
             min-height: 100vh;
             overflow-x: hidden;
+            font-family: "font-1" , Arial, Helvetica, sans-serif;
         }
 
         main {
@@ -57,6 +64,10 @@
         .alert-error {
             background-color: red;
             color: black;
+        }
+
+        .right {
+            justify-content: right !important;
         }
     </style>
 
