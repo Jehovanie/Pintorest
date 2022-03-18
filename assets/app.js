@@ -9,4 +9,7 @@
 import './sass/app.scss';
 
 // start the Stimulus application
-import './bootstrap';
+import 'bootstrap';
+
+
+console.log('js run ...')

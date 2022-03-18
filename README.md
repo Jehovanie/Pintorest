@@ -11,3 +11,5 @@ Compiler file css /
 Installation bootstrap 
 
     - npm install bootstrap --save-dev
+    - npm install jquery poper --save-dev
+    
