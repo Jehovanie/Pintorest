@@ -1,10 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-@font-face {
-    font-family: "font-1";
-    src: url(./style/fonts/CircularStd-Book.ttf);
-}
+@import 'shared/variables';
 
-* {
+
+
+*{
     margin: 0;
     padding: 0;
     box-sizing: 0;
@@ -15,7 +15,7 @@ body {
     min-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
-    font-family: "font-1" , Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 main {
@@ -31,21 +31,22 @@ main {
     margin: 0;
     border: none;
     border-radius: 0;
-}
 
-.alert-success {
-    background-color: green;
-    color: white;
-}
+    &.alert-success{
+        background-color: green;
+        color: white;
+    }
 
-.alert-info {
-    background-color: rgb(74, 166, 252);
-    color: white;
-}
+    &.alert-info {
+        background-color: rgb(74, 166, 252);
+        color: white;
+    }
 
-.alert-error {
-    background-color: red;
-    color: black;
+    &.alert-error {
+        background-color: red;
+        color: black;
+    }
+
 }
 
 .right {
