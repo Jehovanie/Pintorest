@@ -6,11 +6,14 @@ use App\Entity\Traits\Timestampable;
 use App\Repository\PinRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PinRepository::class)
  * @ORM\Table(name="pins")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
  */
 class Pin
 {
@@ -32,11 +35,25 @@ class Pin
     private $title;
 
     /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName")
+     * 
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Length(min=10)
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
 
 
     public function getId(): ?int
@@ -68,26 +85,35 @@ class Pin
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
     {
-        return $this->createdAt;
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdateAt(new \DateTimeImmutable);
+        }
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function getImageFile(): ?File
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
+        return $this->imageFile;
     }
 
-    public function getUpdateAt(): ?\DateTimeInterface
+
+    public function getImageName(): ?string
     {
-        return $this->updateAt;
+        return $this->imageName;
     }
 
-    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    public function setImageName(?string $imageName): self
     {
-        $this->updateAt = $updateAt;
+        $this->imageName = $imageName;
 
         return $this;
     }
