@@ -52,3 +52,14 @@ main {
 .right {
     justify-content: right !important;
 }
+
+.vich-image {
+    .form-check{
+        @extend .mt-4;
+    }
+    img{
+        @extend .mb-2;
+        @extend .rounded;
+        @extend .img-thumbnail;
+    }
+}

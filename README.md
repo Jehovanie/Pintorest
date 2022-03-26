@@ -13,3 +13,12 @@ Installation bootstrap
     - npm install bootstrap --save-dev
     - npm install jquery poper --save-dev
     
+
+Bundle pour upload une image .
+    VichUploaderBundle.
+
+Manipulation des images pour les projects dévélopper en symfony .
+    liipImage 
+
+
+Possible que la taille de l'image est trés gros taille donc on utilise imagick
