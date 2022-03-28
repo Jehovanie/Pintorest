@@ -4,34 +4,38 @@
 {% set len = pin.id %}
 {% endif %}
 
-{% block title %}Pintorest : {{len}} {% endblock %}
+{% block title %}Pantorest : {{len}} {% endblock %}
 
 {% block body %}
 <div class="container">
-    <div class="card p-4">
-        <div class="card-title">
-            <h2 class="text-primary">{{pin.title}}</h2>
+    <div class="row">
+        <div class=" m-auto col-md-4">
+            <div class="card p-4">
+                <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium')}}"
+                    alt="Image de pin">
+                <div class="card-title">
+                    <h2 class="text-primary">{{pin.title}}</h2>
+                </div>
+                <div class="card-body">
+                    {{ pin.description}}
+                </div>
+                <div>
+                    {{ pin.createdAt | ago}}
+                </div>
+                <div class="card-footer">
+                    <h5>
+                        <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
+                        <a href="#"
+                            onclick="event.preventDefault(); confirm('Are you sure') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
+                        <a href="{{path('app_home')}}">Back</a>
+                    </h5>
+                </div>
+                <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
+                    style="display:none;">
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
+            </div>
         </div>
-        <div class="card-body">
-            {{ pin.description}}
-        </div>
-        <div>
-            {{ pin.createdAt | ago}}
-        </div>
-        <div class="card-footer">
-            <h5>
-                <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
-                <a href="#"
-                    onclick="event.preventDefault(); confirm('Are you sure') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
-                <a href="{{path('app_home')}}">Back</a>
-            </h5>
-        </div>
-        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
-            style="display:none;">
-            <input type="hidden" name="_method" value="DELETE">
-        </form>
-
-
     </div>
 </div>
 {% endblock %}

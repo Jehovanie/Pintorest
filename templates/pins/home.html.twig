@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Pintorest : Home {% endblock %}
+{% block title %}Pantorest : Home {% endblock %}
 
 {% block body %}
 
@@ -10,25 +10,30 @@
     <div>
         <h1> {{ pluralize( len , "Pin") }} </h1>
     </div>
-    {% for pin in pins %}
-    <div>
-        <h4>
-            <a href="{{path('app_show_pin',{ id : pin.id})}}">{{ pin.title }}</a>
-        </h4>
-        <p> {{ pin.description | u.truncate(10 , '...', false ) }} </p>
-        <h5>
-            <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
-            <a href="#"
-                onclick="event.preventDefault(); confirm('Vous êtes sure de la supprimer ?') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
-        </h5>
+    <div class="row">
+        {% for pin in pins %}
+        <div class="col-md-4">
+            <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpg')) | imagine_filter('squared_thumbnail_small')}}"
+                alt="Image de pin">
+            <h4>
+                <a href="{{path('app_show_pin',{ id : pin.id})}}">{{ pin.title }}</a>
+            </h4>
+            <p> {{ pin.description | u.truncate(10 , '...', false ) }} </p>
+            <h5>
+                <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
+                <a href="#"
+                    onclick="event.preventDefault(); confirm('Vous êtes sure de la supprimer ?') && document.getElementById('js-pin-delete-form').submit();">Supprime</a>
+            </h5>
 
-        <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
-            style="display:none;">
-            <input type="hidden" name="_method" value="DELETE">
-        </form>
-    </div>
-    {% else %}
+            <form id="js-pin-delete-form" action="{{ path('app_delete_pin',{ id : pin.id})}}" method="post"
+                style="display:none;">
+                <input type="hidden" name="_method" value="DELETE">
+            </form>
+        </div>
+        {% else %}
         <h1 class="text-center"> Il y a pas de pin pour le moment . Veuillez rajouter !!! </h1>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}
