@@ -10,8 +10,9 @@
     <div>
         <h1> {{ pluralize( len , "Pin") }} </h1>
     </div>
+    {% for row in pins|batch(3) %}
     <div class="row">
-        {% for pin in pins %}
+        {% for pin in row %}
         <div class="col-md-4">
             <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpg')) | imagine_filter('squared_thumbnail_small')}}"
                 alt="Image de pin">
@@ -30,10 +31,10 @@
                 <input type="hidden" name="_method" value="DELETE">
             </form>
         </div>
-        {% else %}
-        <h1 class="text-center"> Il y a pas de pin pour le moment . Veuillez rajouter !!! </h1>
-        {% endfor %}
+        {% endfor%}
     </div>
-
+    {% else %}
+    <h1 class="text-center"> Il y a pas de pin pour le moment . Veuillez rajouter !!! </h1>
+    {% endfor %}
 </div>
 {% endblock %}
