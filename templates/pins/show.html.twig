@@ -9,20 +9,21 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class=" m-auto col-md-4">
-            <div class="card p-4">
-                <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium')}}"
+        <div class="m-auto col-lg-4 col-md-5 col-sm-6 col-6">
+            <article class="pin bg-white rounded shadow">
+                <div class="mw-100 rounded-top overflow-hidden">
+                    <img class="w-100" 
+                    src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpg')) | imagine_filter('squared_thumbnail_medium')}}"
                     alt="Image de pin">
-                <div class="card-title">
-                    <h2 class="text-primary">{{pin.title}}</h2>
                 </div>
-                <div class="card-body">
+                <h2 class="mx-5 pl-3 pt-3">{{pin.title}}</h2>
+                <p class="mx-5 pl-3 pb-3 text-mutted">
                     {{ pin.description}}
-                </div>
-                <div>
+                </p>
+                <div class="mx-5 mt-3">
                     {{ pin.createdAt | ago}}
                 </div>
-                <div class="card-footer">
+                <div class="card-footer p-3">
                     <h5>
                         <a href="{{path('app_update_pin',{ id : pin.id})}}"> Modifier</a>
                         <a href="#"
@@ -34,7 +35,7 @@
                     style="display:none;">
                     <input type="hidden" name="_method" value="DELETE">
                 </form>
-            </div>
+            </article>
         </div>
     </div>
 </div>

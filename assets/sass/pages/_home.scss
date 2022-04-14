@@ -1,0 +1,35 @@
+.element {
+    display: block;
+
+    img {
+        width: 300px;
+        height: 300px;
+    }
+
+    h4 {
+        display: block;
+        width: 60%;
+        margin: auto;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    #delete {
+        color: black;
+    }
+}
+
+.pin img {
+    transition: .2s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+}
