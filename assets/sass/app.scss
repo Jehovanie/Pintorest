@@ -6,7 +6,7 @@
 
 @import 'pages/home';
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: 0;
@@ -34,7 +34,7 @@ main {
     border: none;
     border-radius: 0;
 
-    &.alert-success{
+    &.alert-success {
         background-color: green;
         color: white;
     }
@@ -56,12 +56,17 @@ main {
 }
 
 .vich-image {
-    .form-check{
+    .form-check {
         @extend .mt-4;
     }
-    img{
+
+    img {
         @extend .mb-2;
         @extend .rounded;
         @extend .img-thumbnail;
     }
+}
+
+a {
+    text-decoration: none;
 }

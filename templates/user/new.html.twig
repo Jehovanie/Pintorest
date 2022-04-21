@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% set title = "Pantorest : Nouvel Utilisateur" %}
+{% set text = "Creation de Nouvel utilisateur" %}
+{% set btn = "Sing Up ..." %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block body %}
+<div class="container">
+    {{ include("user/elements/_form.html.twig") }}
+</div>
+{% endblock %}
