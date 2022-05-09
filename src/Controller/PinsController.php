@@ -24,7 +24,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/create", name="app_create_pin" , methods="GET|POST")
+     * @Route("/pins/new", name="app_create_pin" , methods="GET|POST")
      */
     public function create(Request $request, EntityManagerInterface $entityManager, Pin $pin = null, UserRepository $userRepo): Response
     {
@@ -32,6 +32,8 @@ class PinsController extends AbstractController
             $pin = new Pin;
         }
 
+
+        ///create the formulaire to add new pin.
         $form = $this->createForm(PinType::class, $pin);
         // $form = $this->createFormBuilder($pin)
         //     ->add("title", TextType::class)
@@ -41,9 +43,12 @@ class PinsController extends AbstractController
 
         $form->handleRequest($request);
 
+        ///after the submitted form
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $jhone = $userRepo->findOneBy(["email" => "jhonedoe@gmail.com"]);
+            $jhone = $userRepo->findOneBy(["email" => "admin@gmail.com"]); ///default jhone doe
+
+            ///our pin is related for one user.
             $pin->setUser($jhone);
 
             $entityManager->persist($pin);
@@ -77,6 +82,8 @@ class PinsController extends AbstractController
      */
     public function update(Request $request, Pin $pin, EntityManagerInterface $entityManager): Response
     {
+
+        ///create form and set their default value to $pin and return $pin with new value of pin.
         $form = $this->createForm(PinType::class, $pin);
 
         $form->handleRequest($request);
@@ -98,7 +105,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}", name="app_delete_pin" , methods={"DELETE","POST"})
+     * @Route("/pins/{id<[0-9]+>}/delete", name="app_delete_pin" , methods={"POST"})
      */
     public function delete(Pin $pin, EntityManagerInterface $entityManager): Response
     {
