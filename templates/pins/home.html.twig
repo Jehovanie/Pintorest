@@ -1,47 +1,53 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Pantorest : Home {% endblock %}
+{% block title %}Pantorest : Home
+{% endblock %}
 
 {% block body %}
 
-<div class="container">
+	<div class="container">
 
-    {% set len = pins|length %}
-    <div>
-        <h1> {{ pluralize( len , "Pin") }} </h1>
-    </div>
-    {% if ( pins != null ) %}
-        {% for row in pins|batch(4) %}
+		{% set len = pins|length %}
+		<div>
+			<h1>
+				{{ pluralize( len , "Pin") }}
+			</h1>
+		</div>
+		{% if ( pins != null ) %}
 
-        <div class="row mt-5">
-            {% for pin in row %}
+			{# grouper par 4 les pins sur les lignes #}
+			{% for row in pins|batch(4) %}
+				<div class="row mt-5">
+					{% for pin in row %}
 
-            <div class="col col-md-3">
+						<div class="col col-md-3">
 
-                <article class="pin bg-white rounded shadow">
-                    <div class="mw-100 overflow-hidden rounded-top">
-                        <a href="{{path('app_show_pin',{ id : pin.id})}}">
-                            <img class="w-100"
-                                src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpeg')) | imagine_filter('squared_thumbnail_small')}}"
-                                alt="Image de pin">
-                        </a>
-                    </div>
+							<article class="pin bg-white rounded shadow">
+								<div class="mw-100 overflow-hidden rounded-top">
+									<a href="{{path('app_show_pin',{ id : pin.id})}}">
+										<img class="w-100" src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('images/placeholder.jpeg')) | imagine_filter('squared_thumbnail_small')}}" alt="Image de pin">
+									</a>
+								</div>
 
-                    <h4 class="m-3 text-primary">
-                        {{pin.title}}
-                    </h4>
-                    <p class="text-muted m-3 pt-3"> <small>Submited by {{ pin.user.fullname}}</small> </p>
-                </article>
-            </div>
+								<h4 class="m-3 text-primary">
+									{{pin.title}}
+								</h4>
+								<p class="text-muted m-3 pt-3">
+									<small>Submited by
+										{{ pin.user.fullname}}</small>
+								</p>
+							</article>
+						</div>
 
-            {% endfor %}
-        </div>
-        {% endfor %}
+					{% endfor %}
+				</div>
+			{% endfor %}
 
-    {% else %}
-    <div class="p-5 bg-primary rounded d-flex justify-content-center">
-        <small class="text-center text-white">Il y a pas de pin pour le moment . Veuillez rajouter !!! </small>
-    </div>
-    {% endif %}
-</div>
+		{% else %}
+			<div class="p-5 bg-primary rounded d-flex justify-content-center">
+				<small class="text-center text-white">Il y a pas de pin pour le moment . Veuillez rajouter !!!
+				</small>
+			</div>
+		{% endif %}
+	</div>
 {% endblock %}

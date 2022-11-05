@@ -1,34 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{app.request.locale }}">
 
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="{{ asset('style/index.jpeg')}}">
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}
+				Welcome!
+			{% endblock %}
+		</title>
 
-    {#  inclusion des fichier css et javascript #}
-    {% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-
-    {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
-    {% endblock %}
+		{#  asset() : cette fontion nous permet de lire les fichiers static dans le directory public  #}
+		<link rel="icon" href="{{ asset('style/index.jpeg')}}">
 
 
-</head>
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{#  inclusion des fichier css et javascript #}
+		{# le nom app se definie dans le webpack.config.js #}
+			{% block stylesheets %}
+		{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-<body>
-    {{ include('layouts/partials/_flash_message.html.twig')}}
-    {{ include('layouts/partials/_nav.html.twig')}}
+			{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+	{% endblock %}
 
-    <main>
-        {% block body %}{% endblock %}
-    </main>
 
-    {{ include('layouts/partials/_footer.html.twig')}}
+	</head>
 
-</body>
+		<body>
 
-</html>
+		{{ include('layouts/partials/_flash_message.html.twig')}}
+		{{ include('layouts/partials/_nav.html.twig')}}
+
+			<main>{% block body %}
+		{% endblock %}
+		</main>
+
+	{{ include('layouts/partials/_footer.html.twig')}}
+
+</body></html>

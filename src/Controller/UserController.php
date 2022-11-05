@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +26,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/new", name="new_user", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface  $entityManagerInterface): Response
     {
         $user = new User;
 
@@ -33,7 +35,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($user);
+            $entityManagerInterface->persist($user);
+            $entityManagerInterface->flush();
+
+            $this->addFlash("success", "User successful created...");
+
+            return $this->redirectToRoute("app_home");
         }
 
         return $this->render('user/new.html.twig', [

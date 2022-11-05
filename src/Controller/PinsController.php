@@ -20,8 +20,7 @@ class PinsController extends AbstractController
      */
     public function index(PinRepository $repo): Response
     {
-        // $pins = $repo->findBy([], ['createdAt' => 'DESC']);
-        $pins = [];
+        $pins = $repo->findBy([], ['createdAt' => 'DESC']);
         return $this->render('pins/home.html.twig', ["pins" => $pins]);
     }
 
@@ -41,6 +40,7 @@ class PinsController extends AbstractController
         //     ->add("title", TextType::class)
         //     ->add("description", TextareaType::class)
         //     ->getform();
+        dd($form);
 
         /* LORSQUE ON DEMANDE AVEC LE METHODE POST (envoie des informations via le formulaire) */
         $form->handleRequest($request);
@@ -48,10 +48,11 @@ class PinsController extends AbstractController
         ///after the submitted form
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $jhone = $userRepo->findOneBy(["email" => "admin@gmail.com"]); ///default jhone doe
-
+            $user = $userRepo->findOneBy(["email" => "jehovanieram@gmail.com"]); ///default jhone doe
             ///our pin is related for one user.
-            $pin->setUser($jhone);
+
+
+            $pin->setUser($user);
 
             $entityManager->persist($pin);
             $entityManager->flush();
@@ -82,15 +83,16 @@ class PinsController extends AbstractController
 
 
     /** 
-     * @Route("/pins/{id<[0-9]+>}/update", name="app_update_pin" , methods="GET|POST")
+     * @Route("/pins/{id<[0-9]+>}/update", name="app_update_pin" , methods={"GET" ,"PUT"})
      */
     public function update(Request $request, Pin $pin, EntityManagerInterface $entityManager): Response
     {
 
         ///create form and set their default value to $pin and return $pin with new value of pin.
         ///herite vient de la class AbstracController
-        $form = $this->createForm(PinType::class, $pin);
 
+        // $form = $this->createForm(PinType::class, $pin);
+        $form = $this->createForm(PinType::class, $pin, ['method' => 'PUT']);
         ///envoie des informations via le requette
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -113,7 +115,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}/delete", name="app_delete_pin" , methods={"POST"})
+     * @Route("/pins/{id<[0-9]+>}", name="app_delete_pin" , methods={"POST" , "DELETE"})
      */
     public function delete(Pin $pin, EntityManagerInterface $entityManager): Response
     {

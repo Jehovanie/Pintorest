@@ -6,6 +6,8 @@ use App\Entity\Traits\Timestampable;
 use App\Repository\PinRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
+///utils pour l'empload file.
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -35,6 +37,13 @@ class Pin
     private $title;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(min=10)
+     */
+    private $description;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName")
@@ -42,13 +51,6 @@ class Pin
      * @var File|null
      */
     private $imageFile;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(min=10)
-     */
-    private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

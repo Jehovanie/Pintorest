@@ -1,18 +1,19 @@
 <div class="container">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 m-auto">
-            <div class="p-3">
-                <h4 class="text-secondary"> {{text}}</h4>
-                {{ form_start(formulaire)}}
-                {{ form_widget(formulaire) }}
-                <div class="my-2">
-                    <input class="btn btn-primary btn-block" type="submit" value="{{btn}}" formnovalidate>
-                </div>
-                {{ form_end(formulaire)}}
-                <div class="my-2">
-                    <a class="btn btn-danger" href="{{path('app_home')}}"> Annuler</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 m-auto">
+			<div class="p-3">
+				<h4 class="text-primary">
+					{{text}}</h4>
+				{{ form_start(formulaire)}}
+				{{ form_widget(formulaire) }}
+				<div class="row">
+					<input class="col-5 btn btn-primary btn-block mx-2" type="submit" value="{{btn}}" formnovalidate>
+					<a class="col-5 btn btn-danger" href="{{path('app_home')}}">
+						Annuler</a>
+				</div>
+				{{ form_end(formulaire)}}
+				<div class="my-2"></div>
+			</div>
+		</div>
+	</div>
 </div>

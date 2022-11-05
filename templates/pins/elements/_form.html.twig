@@ -1,18 +1,25 @@
+<!--  On a configuer le theme de cette formulaire dans le config/packages twig.yaml -->
 <div class="container">
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 m-auto">
-            <div class="p-3">
-                <h4 class="text-secondary"> {{text}}</h4>
-                {{ form_start(formulaire)}}
-                {{ form_widget(formulaire) }}
-                <div class="my-2">
-                    <input class="btn btn-primary btn-block" type="submit" value="{{btn}}" formnovalidate>
-                </div>
-                {{ form_end(formulaire)}}
-                <div class="my-2">
-                    <a class="btn btn-danger" href="{{path('app_home')}}"> Annuler</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 m-auto">
+			<div class="p-3">
+
+				<h4 class="text-secondary">{{text}}</h4>
+
+				{{ form_start(formulaire)}}
+				{{ form_widget(formulaire) }}
+
+				<div class="my-2">
+					<input class="btn btn-primary btn-block" type="submit" value="{{btn}}" formnovalidate>
+				</div>
+
+				{{ form_end(formulaire)}}
+
+
+				<div class="my-2">
+					<a class="btn btn-danger" href="{{path('app_home')}}">Annuler</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

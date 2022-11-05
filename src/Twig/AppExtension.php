@@ -29,7 +29,7 @@ class AppExtension extends AbstractExtension
     {
         $plural ??= $singlar . 's';
 
-        $srt = $count === 1 ? $singlar : $plural;
+        $srt = $count === 1 || $count === 0  ? $singlar : $plural;
 
         return "$count $srt";
     }
